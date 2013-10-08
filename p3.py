@@ -54,7 +54,7 @@ def plot(name,clist,j):
     b=cl[2]/(cl[1])
     c=clist[i][0]
     gnucmd.write("%f*x+%f w line lt %d title 'C=%d', "%(a,b,i+3,c))
-  gnucmd.write("\'%s\' u 1:2 w points pt 4 lt 2 notitle\n"%negf)
+  gnucmd.write("\'%s\' u 1:2 w points pt 6 lt 2 notitle\n"%negf)
   gnucmd.close()
   os.system("gnuplot gnup.cmd")
     

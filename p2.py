@@ -163,6 +163,26 @@ def partA(s):
     trainc.append(a[0])
   print trainc
   print testc
+  cout=file("p2pa.dat","w")
+  for i in range(len(clist)):
+    cout.write("%f %f %f\n"%(clist[i],trainc[i],testc[i]))
+  cout.close()
+  gnucmd=file("p2pa.cmd","w")
+  gnucmd.write("set terminal png\n")
+  gnucmd.write("set size square\n")
+  gnucmd.write("set key default\n")
+  gnucmd.write("set key bottom right\n")
+  gnucmd.write("set xrange [0.0001:200.0]\n")
+  gnucmd.write("set xlabel 'log C'\n")
+  gnucmd.write("set ylabel 'Accuracy'\n")
+  gnucmd.write("set logscale x\n")
+  gnucmd.write("set grid xtics lt 0 lw 1 lc rgb \"#bbbbbb\"\n")
+  gnucmd.write("set grid ytics lt 0 lw 1 lc rgb \"#bbbbbb\"\n")
+  gnucmd.write("set out 'p2pa.png'\n")
+  gnucmd.write("plot \'p2pa.dat\' u 1:2 w linespoints pt 1 lt 1 title 'Training', ")
+  gnucmd.write("\'p2pa.dat\' u 1:3 w linespoints pt 4 lt 2 title 'Validation'\n")
+  gnucmd.close()
+  os.system("gnuplot p2pa.cmd")
   cbest=0
   maxacc=0
   for i in range(len(testc)):
@@ -191,3 +211,4 @@ s1=normalize("groups2")
 print "\n----Part C----"
 cb=partA(s1)
 partB(s1,cb)
+
